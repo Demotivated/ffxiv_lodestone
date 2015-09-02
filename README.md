@@ -4,4 +4,4 @@
 
 ### Production
 
-Dev site is publicly available under at [academic-bias](https://academic-bias.herokuapp.com/).
+Dev site is publicly available at [academic-bias](https://academic-bias.herokuapp.com/).
