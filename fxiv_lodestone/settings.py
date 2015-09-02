@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'fxiv_lodestone.wsgi.application'
+WSGI_APPLICATION = os.environ.get('DJANGO_SECRET_KEY')
 
 
 # Database
