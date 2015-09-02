@@ -41,9 +41,9 @@ INSTALLED_APPS = (
 )
 
 OPBEAT = {
-    'ORGANIZATION_ID': os.environ.get('b2ec467237974af3ac0c15bc9ce27a4c'),
-    'APP_ID': os.environ.get('f958833eb8'),
-    'SECRET_TOKEN': os.environ.get('2b377282c5b7b2dc618b80c7f8adde71f5c4bd6e'),
+    'ORGANIZATION_ID': os.environ.get('OPBEAT_ORGANIZATION_ID'),
+    'APP_ID': os.environ.get('OPBEAT_APP_ID'),
+    'SECRET_TOKEN': os.environ.get('OPBEAT_SECRET_TOKEN'),
 }
 
 MIDDLEWARE_CLASSES = (
