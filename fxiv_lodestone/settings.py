@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://academic-bias.herokuapp.com/']
 
 
 # Application definition
@@ -44,6 +44,7 @@ OPBEAT = {
     'ORGANIZATION_ID': os.environ.get('OPBEAT_ORGANIZATION_ID'),
     'APP_ID': os.environ.get('OPBEAT_APP_ID'),
     'SECRET_TOKEN': os.environ.get('OPBEAT_SECRET_TOKEN'),
+    'DEBUG': True
 }
 
 MIDDLEWARE_CLASSES = (
@@ -77,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = os.environ.get('WSGI_SECRET_KEY')
+WSGI_APPLICATION = 'fxiv_lodestone.wsgi.application'
 
 
 # Database
