@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gcb=*$&cn6-9b56205-$kiu!q14pdag2_$e-hv-yixgg+anv#)'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,9 +37,17 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'opbeat.contrib.django',
 )
 
+OPBEAT = {
+    'ORGANIZATION_ID': os.environ.get('b2ec467237974af3ac0c15bc9ce27a4c'),
+    'APP_ID': os.environ.get('f958833eb8'),
+    'SECRET_TOKEN': os.environ.get('2b377282c5b7b2dc618b80c7f8adde71f5c4bd6e'),
+}
+
 MIDDLEWARE_CLASSES = (
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -69,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = os.environ.get('DJANGO_SECRET_KEY')
+WSGI_APPLICATION = os.environ.get('WSGI_SECRET_KEY')
 
 
 # Database
