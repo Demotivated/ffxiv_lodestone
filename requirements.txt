@@ -1,3 +1,5 @@
 django
 django-toolbelt
+lxml
+requests
 opbeat
