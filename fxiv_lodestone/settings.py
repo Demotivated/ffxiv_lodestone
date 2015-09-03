@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'fxiv_lodestone.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django_postgrespool',
         'NAME': dj_database_url.config()
     }
 }
