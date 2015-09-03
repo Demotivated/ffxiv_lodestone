@@ -1,5 +1,6 @@
 django
 django-toolbelt
+dj-database-url
 lxml
 requests
 opbeat
