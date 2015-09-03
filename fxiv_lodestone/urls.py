@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from api.views import parse_by_id
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^parse/(?P<lodestone_id>[0-9]+)/$', parse_by_id, name='parse_by_id')
 ]

@@ -8,3 +8,4 @@ class Character(models.Model):
     species = models.CharField(max_length=20)
     city_state = models.CharField(max_length=20)
     free_company = models.CharField(max_length=100)
+    grand_company = models.CharField(max_length=20, default='')
