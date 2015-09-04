@@ -87,8 +87,18 @@ WSGI_APPLICATION = 'fxiv_lodestone.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config()
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "fxiv_lodestone",
+        "USER": "postgres",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(default='pos')
+# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',

@@ -13,13 +13,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Character',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
-                ('lodestone_id', models.CharField(max_length=10)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('lodestone_id', models.CharField(max_length=100)),
                 ('name', models.CharField(max_length=100)),
-                ('server', models.CharField(max_length=20)),
-                ('species', models.CharField(max_length=20)),
-                ('city_state', models.CharField(max_length=20)),
+                ('server', models.CharField(max_length=100)),
+                ('species', models.CharField(max_length=100)),
+                ('city_state', models.CharField(max_length=100)),
                 ('free_company', models.CharField(max_length=100)),
+                ('grand_company', models.CharField(max_length=100, default='')),
             ],
         ),
     ]

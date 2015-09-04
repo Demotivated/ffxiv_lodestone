@@ -2,6 +2,7 @@ django
 django-toolbelt
 dj-database-url
 django-postgrespool
+psycopg2
 lxml
 requests
 opbeat
