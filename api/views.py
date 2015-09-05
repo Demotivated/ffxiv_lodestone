@@ -11,11 +11,16 @@ def parse_by_id(request, lodestone_id):
     page = requests.get('http://na.finalfantasyxiv.com/lodestone/character/{}/'.format(
         lodestone_id
     ))
-    logging.debug('Attempting to parse id {}'.format(lodestone_id))
-    # tree = html.fromstring(page.text)
-    tree = html.fromstring(page.text)
+    try:
+        assert page.status_code == 200
+    except AssertionError:
+        logging.error('Can\'t contact Lodestone')
+        return HttpResponseServerError()
 
+    logging.debug('Attempting to parse id {}'.format(lodestone_id))
+    tree = html.fromstring(page.text)
     char = Character()
+
     try:
         char.lodestone_id = lodestone_id
         char.name = tree.xpath('//title/text()')[0].split('|')[0].strip()
@@ -32,7 +37,9 @@ def parse_by_id(request, lodestone_id):
         char.species = species.strip()
 
         char.save()
+
     except ValueError:
         logging.error('Unable to parse id {} from lodestone'.format(lodestone_id), exc_info=True)
         return HttpResponseServerError()
+
     return HttpResponse()
