@@ -25,7 +25,7 @@ def scrape_by_id(request, lodestone_id):
         char.lodestone_id = lodestone_id
         char.name = tree.xpath('//title/text()')[0].split('|')[0].strip()
 
-        info = tree.xpath('//dl[@class="chara_profile_box_info clearfix"]//dd[@class="txt_name"]/text()')
+        info = tree.xpath('//dd[@class="txt_name"]/text()')
         _, _, char.city_state, char.grand_company = info
 
         char.free_company = tree.xpath('//dd[@class="txt_name"]/a[contains(@href, "")]/text()')[0]
