@@ -4,9 +4,9 @@ from django.core.urlresolvers import reverse
 from .models import Character
 
 
-class TrivialTestCase(TestCase):
+class ScrapeFromLodestoneTestCase(TestCase):
 
-    def test_parse_by_id(self):
+    def test_scrape_by_id(self):
         client = Client()
         lodestone_id = '8774791'
 

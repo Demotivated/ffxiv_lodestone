@@ -7,7 +7,7 @@ from lxml import html
 from .models import Character
 
 
-def parse_by_id(request, lodestone_id):
+def scrape_by_id(request, lodestone_id):
     page = requests.get('http://na.finalfantasyxiv.com/lodestone/character/{}/'.format(
         lodestone_id
     ))
