@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 
-from .models import Character
+from api.models import Character
 
 
 class ScrapeFromLodestoneTestCase(TestCase):
@@ -10,7 +10,7 @@ class ScrapeFromLodestoneTestCase(TestCase):
         client = Client()
         lodestone_id = '8774791'
 
-        response = client.post(reverse('parse_by_id', kwargs={
+        response = client.post(reverse('scrape_by_id', kwargs={
             'lodestone_id': lodestone_id
         }))
         self.assertEqual(response.status_code, 200)
