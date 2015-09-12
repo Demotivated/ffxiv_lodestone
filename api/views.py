@@ -26,12 +26,10 @@ def scrape_by_id(request, lodestone_id):
         char.lodestone_id = lodestone_id
         char.name = html.title.string.split('|')[0].strip()
 
-        elements = html.find_all('dd', attrs={
-            'class': 'txt_name'
-        })
-        char.city_state = elements[2].text
-        char.grand_company = elements[3].text
-        char.free_company = elements[4].text
+        elements = html.find_all('dd')
+        char.city_state = elements[5].text
+        char.grand_company = elements[7].text
+        char.free_company = elements[9].text
 
         char.server = html.find(string=re.compile('^ \([A-Z][a-z]+\)$'))[2:-1]
         char.species = html.find('div', attrs={'class': 'chara_profile_title'}).text.split('/')[0].strip()
