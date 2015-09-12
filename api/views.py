@@ -1,8 +1,9 @@
 from django.http import HttpResponse, HttpResponseServerError
 import logging
+import re
 
 import requests
-from lxml import html
+from bs4 import BeautifulSoup
 
 from .models import Character
 
@@ -18,23 +19,22 @@ def scrape_by_id(request, lodestone_id):
         return HttpResponseServerError()
 
     logging.debug('Attempting to parse id {}'.format(lodestone_id))
-    tree = html.fromstring(page.text)
+    html = BeautifulSoup(page.text, 'html.parser')
     char = Character()
 
     try:
         char.lodestone_id = lodestone_id
-        char.name = tree.xpath('//title/text()')[0].split('|')[0].strip()
+        char.name = html.title.string.split('|')[0].strip()
 
-        info = tree.xpath('//dd[@class="txt_name"]/text()')
-        _, _, char.city_state, char.grand_company = info
+        elements = html.find_all('dd', attrs={
+            'class': 'txt_name'
+        })
+        char.city_state = elements[2].text
+        char.grand_company = elements[3].text
+        char.free_company = elements[4].text
 
-        char.free_company = tree.xpath('//dd[@class="txt_name"]/a[contains(@href, "")]/text()')[0]
-
-        char.server = tree.xpath('//h2//span/text()')[0].strip()[1:-1]
-
-        info = tree.xpath('//div[@class="chara_profile_title"]')
-        species, _, _ = info[0].text.split('/')
-        char.species = species.strip()
+        char.server = html.find(string=re.compile('^ \([A-Z][a-z]+\)$'))[2:-1]
+        char.species = html.find('div', attrs={'class': 'chara_profile_title'}).text.split('/')[0].strip()
 
         char.save()
 

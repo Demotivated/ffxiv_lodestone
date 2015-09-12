@@ -2,6 +2,6 @@ django==1.8.4
 django-toolbelt
 dj-database-url==0.3.0
 psycopg2==2.6.1
-lxml==3.4.4
+beautifulsoup4==4.4.0
 requests==2.7.0
 opbeat==3.0.4
