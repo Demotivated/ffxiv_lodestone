@@ -20,4 +20,4 @@ class ScrapeFromLodestoneTestCase(TestCase):
         self.assertIn('Gridania', text)
         self.assertIn('Zanarkand', text)
         self.assertIn('Zalera', text)
-        self.assertIn('Miqo\'te', text)
+        self.assertIn('Miqo&#39;te', text)
