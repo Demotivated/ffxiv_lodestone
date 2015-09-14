@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 
 from .models import Character
 from .exceptions import ParsingException
+from .constants import USER_AGENT
 
 
 def scrape_by_id(request, lodestone_id):
@@ -14,9 +15,9 @@ def scrape_by_id(request, lodestone_id):
         logging.debug('Attempting to parse id {}'.format(lodestone_id))
 
         try:
-            page = requests.get('http://na.finalfantasyxiv.com/lodestone/character/{}/'.format(
-                lodestone_id
-            ))
+            headers = {'User-Agent': USER_AGENT}
+            uri = 'http://na.finalfantasyxiv.com/lodestone/character/{}/'.format(lodestone_id)
+            page = requests.get(uri, headers=headers)
             assert page.status_code == 200
         except AssertionError:
             raise ParsingException('Can\'t contact Lodestone')
