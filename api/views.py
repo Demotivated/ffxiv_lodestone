@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import JsonResponse, HttpResponseServerError
 import logging
 import re
 
@@ -42,4 +42,4 @@ def scrape_by_id(request, lodestone_id):
     except ParsingException as e:
         return HttpResponseServerError(e.message)
 
-    return HttpResponse()
+    return JsonResponse(char.as_dict())
