@@ -36,7 +36,7 @@ def scrape_by_id(request, lodestone_id):
 
             char.save()
         except (IndexError, ValueError):
-            raise ParsingException('Unable to parse id {} from lodestone'.format(lodestone_id), exc_info=True)
+            raise ParsingException('Unable to parse id {} from lodestone'.format(lodestone_id))
 
     except ParsingException as e:
         return HttpResponseServerError(e.message)
