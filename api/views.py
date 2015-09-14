@@ -37,6 +37,40 @@ def scrape_by_id(request, lodestone_id):
             species, _, _ = info[0].text.split('/')
             char.species = species.strip()
 
+            def lvl_from_index(index):
+                char = class_list[index]
+                if char == '-':
+                    return 0
+                else:
+                    return int(char)
+
+            class_list = tree.xpath('//td/text()')
+            char.lvl_gladiator = lvl_from_index(0*3+1)
+            char.lvl_pugilist = lvl_from_index(1*3+1)
+            char.lvl_marauder = lvl_from_index(2*3+1)
+            char.lvl_lancer = lvl_from_index(3*3+1)
+            char.lvl_archer = lvl_from_index(4*3+1)
+            char.lvl_rogue = lvl_from_index(5*3+1)
+            char.lvl_conjurer = lvl_from_index(6*3+1)
+            char.lvl_thaumaturge = lvl_from_index(7*3+1)
+            char.lvl_arcanist = lvl_from_index(8*3+1)
+
+            char.lvl_dark_night = lvl_from_index(9*3+1)
+            char.lvl_machinist = lvl_from_index(10*3+1)
+            char.lvl_astrologian = lvl_from_index(11*3+1)
+
+            char.lvl_carpenter = lvl_from_index(12*3+1)
+            char.lvl_blacksmith = lvl_from_index(13*3+1)
+            char.lvl_armorer = lvl_from_index(14*3+1)
+            char.lvl_goldsmith = lvl_from_index(15*3+1)
+            char.lvl_leatherworker = lvl_from_index(16*3+1)
+            char.lvl_weaver = lvl_from_index(17*3+1)
+            char.lvl_alchemist = lvl_from_index(18*3+1)
+            char.lvl_culinarian = lvl_from_index(19*3+1)
+            char.lvl_miner = lvl_from_index(20*3+1)
+            char.lvl_botanist = lvl_from_index(21*3+1)
+            char.lvl_fisher = lvl_from_index(22*3+1)
+
             char.save()
         except (IndexError, ValueError):
             raise ParsingException('Unable to parse id {} from lodestone'.format(lodestone_id))
