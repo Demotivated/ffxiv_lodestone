@@ -20,5 +20,5 @@ from api.views import scrape_by_id
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^parse/(?P<lodestone_id>[0-9]+)/$', scrape_by_id, name='scrape_by_id')
+    url(r'^scrape/character/(?P<lodestone_id>[0-9]+)/$', scrape_by_id, name='scrape_by_id')
 ]
