@@ -9,7 +9,7 @@ class ScrapeFromLodestoneTestCase(TestCase):
     def setUp(self):
         self.client = Client()
         self.lodestone_id = '8774791'
-        self.response = self.client.post(reverse('scrape_by_id', kwargs={
+        self.response = self.client.post(reverse('scrape_char_view', kwargs={
             'lodestone_id': self.lodestone_id
         }))
         self.assertEqual(self.response.status_code, 200)

@@ -16,9 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from api.views import scrape_by_id
+from api.views import scrape_char_view
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^scrape/character/(?P<lodestone_id>[0-9]+)/$', scrape_by_id, name='scrape_by_id')
+    url(r'^scrape/character/(?P<lodestone_id>[0-9]+)/$', scrape_char_view, name='scrape_char_view')
 ]
