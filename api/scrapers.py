@@ -1,4 +1,3 @@
-from django.http import JsonResponse, HttpResponseServerError
 import logging
 
 import requests
