@@ -1,0 +1,5 @@
+[run]
+source = .
+
+[report]
+omit = fxiv_lodestone/wsgi.py
