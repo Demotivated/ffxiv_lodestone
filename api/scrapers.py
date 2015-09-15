@@ -1,3 +1,4 @@
+from django.http import JsonResponse, HttpResponseServerError
 import logging
 
 import requests
@@ -19,7 +20,7 @@ def scrape_character_by_id(lodestone_id):
         assert page.status_code == 200
 
     except AssertionError:
-        raise ParsingException('Can\'t contact Lodestone')
+        raise ParsingException('Invalid response from Lodestone')
 
     try:
         char = Character()

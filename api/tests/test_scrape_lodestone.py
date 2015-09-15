@@ -68,4 +68,4 @@ class ScrapeFromLodestoneTestCase(TestCase):
             'lodestone_id': '91238298371293791287391827317314422'
         }))
         self.assertEqual(response.status_code, 500)
-        self.assertEqual(response.content.decode('utf-8'), 'Can\'t contact Lodestone')
+        self.assertEqual(response.content.decode('utf-8'), 'Invalid response from Lodestone')
