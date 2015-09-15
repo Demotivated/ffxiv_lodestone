@@ -62,3 +62,10 @@ class ScrapeFromLodestoneTestCase(TestCase):
                 },
             }
         )
+
+    def test_invalid_lodestone_id(self):
+        response = self.client.post(reverse('scrape_char_view', kwargs={
+            'lodestone_id': '91238298371293791287391827317314422'
+        }))
+        self.assertEqual(response.status_code, 500)
+        self.assertEqual(response.content.decode('utf-8'), 'Can\'t contact Lodestone')
