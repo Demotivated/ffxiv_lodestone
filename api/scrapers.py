@@ -10,7 +10,7 @@ from .constants import USER_AGENT
 
 def scrape_character_by_id(lodestone_id):
     
-    logging.debug('Attempting to parse id {}'.format(lodestone_id))
+    logging.debug('Attempting to parse character id {}'.format(lodestone_id))
 
     try:
         headers = {'User-Agent': USER_AGENT}
@@ -107,7 +107,7 @@ def scrape_character_by_id(lodestone_id):
 
 def scrape_character_weapons_by_id(lodestone_id):
 
-    logging.debug('Attempting to parse weapons from id {}'.format(lodestone_id))
+    logging.debug('Attempting to parse items from id {}'.format(lodestone_id))
 
     try:
         headers = {'User-Agent': USER_AGENT}
@@ -127,6 +127,6 @@ def scrape_character_weapons_by_id(lodestone_id):
             weapons.append(weapon.attrib['href'])
 
     except (IndexError, ValueError):
-        raise ParsingException('Unable to parse id {} from lodestone'.format(lodestone_id))
+        raise ParsingException('Unable to parse item id {} from lodestone'.format(lodestone_id))
 
     return weapons
