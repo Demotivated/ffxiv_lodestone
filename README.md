@@ -14,38 +14,84 @@ Example API response:
 
 ```
 {
-  "name": "Mina Loriel",
-  "free_company": "Zanarkand",
-  "lodestone_id": "8774791",
-  "species": "Miqo'te",
-  "grand_company": "Order of the Twin Adder/Second Serpent Lieutenant",
-  "city_state": "Gridania",
-  "classes": {
-    "carpenter": 50,
-    "goldsmith": 50,
-    "marauder": 0,
-    "gladiator": 0,
-    "conjurer": 50,
-    "botanist": 20,
-    "blacksmith": 18,
-    "weaver": 50,
-    "leatherworker": 16,
-    "astrologian": 0,
-    "culinarian": 37,
-    "arcanist": 50,
-    "rogue": 0,
-    "dark_night": 0,
-    "armorer": 15,
-    "archer": 9,
-    "miner": 0,
-    "thaumaturge": 26,
-    "machinist": 0,
-    "pugilist": 0,
-    "alchemist": 16,
-    "fisher": 0,
-    "lancer": 6
-  },
-  "server": "Zalera"
+    "free_company": "Zanarkand",
+    "name": "Mina Loriel",
+    "classes": {
+        "armorer": {
+            "level": 15
+        },
+        "alchemist": {
+            "level": 16
+        },
+        "leatherworker": {
+            "level": 16
+        },
+        "pugilist": {
+            "level": 0
+        },
+        "carpenter": {
+            "level": 50
+        },
+        "culinarian": {
+            "level": 37
+        },
+        "arcanist": {
+            "level": 50
+        },
+        "fisher": {
+            "level": 0
+        },
+        "machinist": {
+            "level": 0
+        },
+        "conjurer": {
+            "level": 50
+        },
+        "blacksmith": {
+            "level": 18
+        },
+        "astrologian": {
+            "level": 0
+        },
+        "thaumaturge": {
+            "level": 26
+        },
+        "gladiator": {
+            "level": 0
+        },
+        "miner": {
+            "level": 0
+        },
+        "lancer": {
+            "level": 6
+        },
+        "rogue": {
+            "level": 0
+        },
+        "marauder": {
+            "level": 0
+        },
+        "botanist": {
+            "level": 20
+        },
+        "weaver": {
+            "level": 50
+        },
+        "archer": {
+            "level": 9
+        },
+        "darknight": {
+            "level": 0
+        },
+        "goldsmith": {
+            "level": 50
+        }
+    },
+    "species": "Miqo'te",
+    "grand_company": "Order of the Twin Adder/Second Serpent Lieutenant",
+    "server": "Zalera",
+    "lodestone_id": "8774791",
+    "city_state": "Gridania"
 }
 ```
 
