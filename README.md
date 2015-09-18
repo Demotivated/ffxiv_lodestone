@@ -10,7 +10,7 @@ Provide interesting statistics pulled from lodestone
 
 Example API response:
 
-`GET {server_url}/scrape/character/{lodestone_id}/`
+`GET /scrape/character/{lodestone_id}/`
 
 ```
 {
