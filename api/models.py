@@ -3,41 +3,21 @@ from django.db import models
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
-    lodestone_id = models.CharField(max_length=100)
-    server = models.CharField(max_length=100)
-    species = models.CharField(max_length=100)
-    city_state = models.CharField(max_length=100)
-    free_company = models.CharField(max_length=100)
+    lodestone_id = models.CharField(max_length=100, default='')
+    server = models.CharField(max_length=100, default='')
+    species = models.CharField(max_length=100, default='')
+    city_state = models.CharField(max_length=100, default='')
+    free_company = models.CharField(max_length=100, default='')
     grand_company = models.CharField(max_length=100, default='')
 
-    lvl_gladiator = models.IntegerField(default=0)
-    lvl_pugilist = models.IntegerField(default=0)
-    lvl_marauder = models.IntegerField(default=0)
-    lvl_lancer = models.IntegerField(default=0)
-    lvl_archer = models.IntegerField(default=0)
-    lvl_rogue = models.IntegerField(default=0)
-
-    lvl_conjurer = models.IntegerField(default=0)
-    lvl_thaumaturge = models.IntegerField(default=0)
-    lvl_arcanist = models.IntegerField(default=0)
-
-    lvl_dark_night = models.IntegerField(default=0)
-    lvl_machinist = models.IntegerField(default=0)
-    lvl_astrologian = models.IntegerField(default=0)
-
-    lvl_carpenter = models.IntegerField(default=0)
-    lvl_blacksmith = models.IntegerField(default=0)
-    lvl_armorer = models.IntegerField(default=0)
-    lvl_goldsmith = models.IntegerField(default=0)
-    lvl_leatherworker = models.IntegerField(default=0)
-    lvl_weaver = models.IntegerField(default=0)
-    lvl_alchemist = models.IntegerField(default=0)
-    lvl_culinarian = models.IntegerField(default=0)
-    lvl_miner = models.IntegerField(default=0)
-    lvl_botanist = models.IntegerField(default=0)
-    lvl_fisher = models.IntegerField(default=0)
-
     def as_dict(self):
+
+        class_dict = {}
+        for c in [self.archer, self.lancer, self.marauder, self.pugilist, self.rogue, self.arcanist, self.conjurer, self.thaumaturge, self.astrologian, self.darknight, self.machinist, self.alchemist, self.armorer, self.blacksmith, self.carpenter, self.culinarian, self.gladiator, self.goldsmith, self.leatherworker, self.weaver, self.botanist, self.fisher, self.miner]:
+            if not c:
+                pass
+            class_dict[c.__class__.__name__.lower()] = c.as_dict()
+
         return {
             'name': self.name,
             'lodestone_id': self.lodestone_id,
@@ -46,32 +26,130 @@ class Character(models.Model):
             'city_state': self.city_state,
             'free_company': self.free_company,
             'grand_company': self.grand_company,
-            'classes': {
-                'gladiator': self.lvl_gladiator,
-                'pugilist': self.lvl_pugilist,
-                'marauder': self.lvl_marauder,
-                'lancer': self.lvl_lancer,
-                'archer': self.lvl_archer,
-                'rogue': self.lvl_rogue,
-
-                'conjurer': self.lvl_conjurer,
-                'thaumaturge': self.lvl_thaumaturge,
-                'arcanist': self.lvl_arcanist,
-
-                'dark_night': self.lvl_dark_night,
-                'machinist': self.lvl_machinist,
-                'astrologian': self.lvl_astrologian,
-
-                'carpenter': self.lvl_carpenter,
-                'blacksmith': self.lvl_blacksmith,
-                'armorer': self.lvl_armorer,
-                'goldsmith': self.lvl_goldsmith,
-                'leatherworker': self.lvl_leatherworker,
-                'weaver': self.lvl_weaver,
-                'alchemist': self.lvl_alchemist,
-                'culinarian': self.lvl_culinarian,
-                'miner': self.lvl_miner,
-                'botanist': self.lvl_botanist,
-                'fisher': self.lvl_fisher
-            }
+            'classes': class_dict
         }
+
+
+class Class(models.Model):
+    character = models.OneToOneField(Character)
+    level = models.IntegerField(default=0)
+
+    def as_dict(self):
+        return {
+            'level': self.level
+        }
+
+    class Meta:
+        abstract = True
+
+
+class DiscipleOfWar(Class):
+    class Meta:
+        abstract = True
+
+
+class DiscipleOfMagic(Class):
+    class Meta:
+        abstract = True
+
+
+class DiscipleOfHand(Class):
+    class Meta:
+        abstract = True
+
+
+class DiscipleOfLand(Class):
+    class Meta:
+        abstract = True
+
+
+class Archer(DiscipleOfWar):
+    pass
+
+
+class Gladiator(DiscipleOfWar):
+    pass
+
+
+class Lancer(DiscipleOfWar):
+    pass
+
+
+class Marauder(DiscipleOfWar):
+    pass
+
+
+class Pugilist(DiscipleOfWar):
+    pass
+
+
+class Rogue(DiscipleOfWar):
+    pass
+
+
+class Arcanist(DiscipleOfMagic):
+    pass
+
+
+class Conjurer(DiscipleOfMagic):
+    pass
+
+
+class Thaumaturge(DiscipleOfMagic):
+    pass
+
+
+class Astrologian(DiscipleOfMagic):
+    pass
+
+
+class DarkNight(DiscipleOfWar):
+    pass
+
+
+class Machinist(DiscipleOfWar):
+    pass
+
+
+class Alchemist(DiscipleOfHand):
+    pass
+
+
+class Armorer(DiscipleOfHand):
+    pass
+
+
+class Blacksmith(DiscipleOfHand):
+    pass
+
+
+class Carpenter(DiscipleOfHand):
+    pass
+
+
+class Culinarian(DiscipleOfHand):
+    pass
+
+
+class Goldsmith(DiscipleOfHand):
+    pass
+
+
+class Leatherworker(DiscipleOfHand):
+    pass
+
+
+class Weaver(DiscipleOfHand):
+    pass
+
+
+class Botanist(DiscipleOfLand):
+    pass
+
+
+class Fisher(DiscipleOfLand):
+    pass
+
+
+class Miner(DiscipleOfLand):
+    pass
