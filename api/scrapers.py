@@ -1,5 +1,4 @@
 import logging
-from django.core.exceptions import ObjectDoesNotExist
 
 import requests
 from lxml import html
