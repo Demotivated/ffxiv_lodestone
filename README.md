@@ -36,6 +36,15 @@ Example API response:
 }
 ```
 
+`GET /scrape/item/{lodestone_id}`
+
+```
+{
+    "lodestone_id": "d19447e548d",
+    "name": "Thyrus Zenith"
+}
+```
+
 ### Production
 
 Dev site is publicly available at [academic-bias](https://academic-bias.herokuapp.com/).
