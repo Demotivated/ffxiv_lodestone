@@ -13,10 +13,11 @@ script:
 after_success:
 - coveralls
 cache:
-- pip
+  directories:
+  - $HOME/.cache/pip
 notifications:
   email:
     recipients:
-      - s.elahmadie@gmail.com
+    - s.elahmadie@gmail.com
     on_success: change
     on_failure: always
