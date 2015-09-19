@@ -30,9 +30,21 @@ class Character(models.Model):
         }
 
 
+class Item(models.Model):
+    lodestone_id = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+
+    def as_dict(self):
+        return {
+            'lodestone_id': self.lodestone_id,
+            'name': self.name
+        }
+
+
 class Class(models.Model):
     character = models.OneToOneField(Character)
     level = models.IntegerField(default=0)
+    items = models.ManyToManyField(Item)
 
     def as_dict(self):
         return {
@@ -153,3 +165,4 @@ class Fisher(DiscipleOfLand):
 
 class Miner(DiscipleOfLand):
     pass
+

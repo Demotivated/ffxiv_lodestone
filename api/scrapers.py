@@ -1,4 +1,5 @@
 import logging
+from django.core.exceptions import ObjectDoesNotExist
 
 import requests
 from lxml import html
@@ -22,6 +23,7 @@ def scrape_character_by_id(lodestone_id):
         raise ParsingException('Invalid response from Lodestone')
 
     try:
+        # Populate Character
         char = Character()
         tree = html.fromstring(page.text)
 
@@ -50,6 +52,7 @@ def scrape_character_by_id(lodestone_id):
                     return int(html_level)
             return parse_level(level)
 
+        # Populate classes
         char.gladiator = Gladiator(
             level=level_from_index(0))
         char.pugilist = Pugilist(
@@ -99,19 +102,34 @@ def scrape_character_by_id(lodestone_id):
         char.fisher = Fisher(
             level=level_from_index(22))
 
+        # Populate items
+        # html_item_list = tree.xpath('//div[@class="item_detail_box"]/div/div/div/div/a')
+        # item_ids = []
+        # for item_id in html_item_list:
+        #     item_ids.append(item_id.attrib['href'].split('/')[5])
+        #
+        # for item_id in item_ids:
+        #     try:
+        #         item = Item.objects.get(lodestone_id=item_ids)
+        #     except ObjectDoesNotExist:
+        #         item = scrape_item_by_id(item_id)
+        #     finally:
+        #         # Add to current class' item list
+        #         pass
+
     except (IndexError, ValueError):
         raise ParsingException('Unable to parse id {} from lodestone'.format(lodestone_id))
 
     return char
 
 
-def scrape_character_weapons_by_id(lodestone_id):
+def scrape_item_by_id(lodestone_id):
 
     logging.debug('Attempting to parse items from id {}'.format(lodestone_id))
 
     try:
         headers = {'User-Agent': USER_AGENT}
-        uri = 'http://na.finalfantasyxiv.com/lodestone/character/{}/'.format(lodestone_id)
+        uri = 'http://na.finalfantasyxiv.com/lodestone/playguide/db/item/{}/'.format(lodestone_id)
         page = requests.get(uri, headers=headers)
         assert page.status_code == 200
 
@@ -121,12 +139,11 @@ def scrape_character_weapons_by_id(lodestone_id):
     try:
         tree = html.fromstring(page.text)
 
-        weapon_list = tree.xpath('//div[@class="item_detail_box"]/div/div/div/div/a')
-        weapons = []
-        for weapon in weapon_list:
-            weapons.append(weapon.attrib['href'])
+        item, _ = Item.objects.get_or_create(lodestone_id=lodestone_id)
+        item.name = tree.xpath('//title/text()')[0].split('|')[0].replace('Eorzea Database:', '').strip()
+        item.save()
 
     except (IndexError, ValueError):
         raise ParsingException('Unable to parse item id {} from lodestone'.format(lodestone_id))
 
-    return weapons
+    return item
