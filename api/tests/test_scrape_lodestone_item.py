@@ -1,3 +1,5 @@
+import logging
+
 from django.test import TestCase, Client
 from django.core.urlresolvers import reverse
 
@@ -30,8 +32,10 @@ class ScrapeFromLodestoneTestCase(TestCase):
         )
 
     def test_invalid_lodestone_id(self):
+        logging.disable(logging.CRITICAL)
         response = self.client.post(reverse('scrape_item_view', kwargs={
             'lodestone_id': '912382983712x937c9128739t1827a317314422'
         }))
         self.assertEqual(response.status_code, 500)
         self.assertEqual(response.content.decode('utf-8'), 'Invalid response from Lodestone')
+        logging.disable(logging.NOTSET)
