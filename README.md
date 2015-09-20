@@ -2,13 +2,7 @@
 
 # Tools for FFXIV Lodestone
 
-### Goal
-
-Provide interesting statistics pulled from lodestone
-
-### Dev
-
-Example API response:
+Example APIs:
 
 `GET /scrape/character/{lodestone_id}/`
 
@@ -47,7 +41,3 @@ Example API response:
     "name": "Thyrus Zenith"
 }
 ```
-
-### Production
-
-Dev site is publicly available at [academic-bias](https://academic-bias.herokuapp.com/).
