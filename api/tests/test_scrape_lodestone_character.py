@@ -18,7 +18,8 @@ class ScrapeFromLodestoneTestCase(TestCase):
         mina = Character.objects.get(lodestone_id=self.lodestone_id)
         self.assertEqual('Mina Loriel', mina.name)
         self.assertEqual(self.lodestone_id, mina.lodestone_id)
-        self.assertEqual('Order of the Twin Adder/Second Serpent Lieutenant', mina.grand_company)
+        self.assertEqual('Order of the Twin Adder', mina.grand_company_name)
+        self.assertEqual('Second Serpent Lieutenant', mina.grand_company_rank)
         self.assertEqual('Gridania', mina.city_state)
         self.assertEqual('Zanarkand', mina.free_company)
         self.assertEqual('Zalera', mina.server)
@@ -32,7 +33,10 @@ class ScrapeFromLodestoneTestCase(TestCase):
                 "free_company": "Zanarkand",
                 "name": "Mina Loriel",
                 "species": "Miqo'te",
-                "grand_company": "Order of the Twin Adder/Second Serpent Lieutenant",
+                "grand_company": {
+                    "name": "Order of the Twin Adder",
+                    "rank": "Second Serpent Lieutenant"
+                },
                 "server": "Zalera",
                 "lodestone_id": "8774791",
                 "city_state": "Gridania",

@@ -8,7 +8,8 @@ class Character(models.Model):
     species = models.CharField(max_length=100, default='')
     city_state = models.CharField(max_length=100, default='')
     free_company = models.CharField(max_length=100, default='')
-    grand_company = models.CharField(max_length=100, default='')
+    grand_company_name = models.CharField(max_length=100, default='')
+    grand_company_rank = models.CharField(max_length=100, default='')
 
     def as_dict(self):
 
@@ -25,7 +26,10 @@ class Character(models.Model):
             'species': self.species,
             'city_state': self.city_state,
             'free_company': self.free_company,
-            'grand_company': self.grand_company,
+            'grand_company': {
+                'name': self.grand_company_name,
+                'rank': self.grand_company_rank
+            },
             'classes': class_dict
         }
 

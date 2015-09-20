@@ -32,7 +32,8 @@ def scrape_character_by_id(lodestone_id):
         char.server = tree.xpath('//h2//span/text()')[0].strip()[1:-1]
 
         info = tree.xpath('//dd[@class="txt_name"]/text()')
-        _, _, char.city_state, char.grand_company = info
+        _, _, char.city_state, grand_company = info
+        char.grand_company_name, char.grand_company_rank = grand_company.split('/')
 
         info = tree.xpath('//div[@class="chara_profile_title"]')
         species, _, _ = info[0].text.split('/')

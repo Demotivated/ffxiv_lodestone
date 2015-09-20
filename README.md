@@ -14,7 +14,6 @@ Example API response:
 
 ```
 {
-    "free_company": "Zanarkand",
     "name": "Mina Loriel",
     "classes": {
         "armorer": {
@@ -28,11 +27,15 @@ Example API response:
         }
         ...
     },
+    "grand_company": {
+        "name": "Order of the Twin Adder",
+        "rank": "Second Serpent Lieutenant"
+    },
+    "city_state": "Gridania",
+    "free_company": "Zanarkand",
     "species": "Miqo'te",
-    "grand_company": "Order of the Twin Adder/Second Serpent Lieutenant",
     "server": "Zalera",
-    "lodestone_id": "8774791",
-    "city_state": "Gridania"
+    "lodestone_id": "8774791"
 }
 ```
 
