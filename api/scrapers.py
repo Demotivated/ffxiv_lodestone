@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+import threading
 
 import requests
 from lxml import html
@@ -95,14 +96,17 @@ def scrape_character_by_id(lodestone_id):
         for item_id in html_item_list:
             item_ids.append(item_id.attrib['href'].split('/')[5])
 
+        # Grab items from database / grab in parallel
+        item_threads = []
         for item_id in item_ids:
             try:
-                item = Item.objects.get(lodestone_id=item_ids)
+                job.items.add(Item.objects.get(lodestone_id=item_id))
             except ObjectDoesNotExist:
-                item = scrape_item_by_id(item_id)
-            finally:
-                # Add to current class' item list
-                job.items.add(item)
+                thread = ItemThread(item_id)
+                thread.start()
+                item_threads.append(thread)
+        for thread in item_threads:
+            job.items.add(thread.join())
 
         job.save()
 
@@ -110,6 +114,21 @@ def scrape_character_by_id(lodestone_id):
         raise ParsingException('Unable to parse id {} from lodestone'.format(lodestone_id))
 
     return char
+
+
+class ItemThread(threading.Thread):
+
+    def __init__(self, item_id):
+        threading.Thread.__init__(self)
+        self.item_id = item_id
+        self._item = None
+
+    def run(self):
+        self._item = scrape_item_by_id(self.item_id)
+
+    def join(self, timeout=None):
+        threading.Thread.join(self)
+        return self._item
 
 
 def scrape_item_by_id(lodestone_id):
