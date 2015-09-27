@@ -26,8 +26,13 @@ class ScrapeFromLodestoneTestCase(TestCase):
         self.assertJSONEqual(
             self.response.content.decode('utf-8'),
             {
-                'lodestone_id': 'd19447e548d',
-                'name': 'Thyrus Zenith'
+                "stats": {
+                    "damage": 69,
+                    "delay": 3.44,
+                    "auto_attack": 52.74
+                },
+                "lodestone_id": "d19447e548d",
+                "name": "Thyrus Zenith"
             }
         )
 

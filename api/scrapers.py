@@ -24,10 +24,9 @@ def scrape_character_by_id(lodestone_id):
 
     try:
         # Populate Character
-        char = Character()
+        char, _ = Character.objects.get_or_create(lodestone_id=lodestone_id)
         tree = html.fromstring(page.text)
 
-        char.lodestone_id = lodestone_id
         char.name = tree.xpath('//title/text()')[0].split('|')[0].strip()
         char.free_company = tree.xpath('//dd[@class="txt_name"]/a[contains(@href, "")]/text()')[0]
         char.server = tree.xpath('//h2//span/text()')[0].strip()[1:-1]
@@ -80,6 +79,7 @@ def scrape_character_by_id(lodestone_id):
         char.lvl_miner = level_from_index(20)
         char.lvl_botanist = level_from_index(21)
         char.lvl_fisher = level_from_index(22)
+        char.save()
 
         # Find current job
         job_images = tree.xpath('//div[@id="class_info"]/div[@class="ic_class_wh24_box"]/img')
@@ -167,6 +167,22 @@ def scrape_item_by_id(lodestone_id):
 
         item, _ = Item.objects.get_or_create(lodestone_id=lodestone_id)
         item.name = tree.xpath('//title/text()')[0].split('|')[0].replace('Eorzea Database:', '').strip()
+        header = tree.xpath('//div[@class="clearfix item_name_area"]/div[@class="box left"]/text()')
+        item.item_type = header[2].strip()
+
+        main_stats = tree.xpath('//div[@class="clearfix sys_nq_element"]/div/strong/text()')
+        if main_stats:
+            if item.item_type == "Shield":
+                item.block_strength = int(main_stats[0])
+                item.block_rate = int(main_stats[1])
+            elif len(main_stats) == 2:
+                item.defense = int(main_stats[0])
+                item.magic_defense = int(main_stats[1])
+            else:
+                item.damage = int(main_stats[0])
+                item.auto_attack = float(main_stats[1])
+                item.delay = float(main_stats[2])
+
         item.save()
 
     except (IndexError, ValueError):

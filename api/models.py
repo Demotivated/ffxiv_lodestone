@@ -7,7 +7,7 @@ from .constants import JOBS
 
 class Character(models.Model):
     name = models.CharField(max_length=100)
-    lodestone_id = models.CharField(max_length=100, default='')
+    lodestone_id = models.CharField(max_length=100, default='', unique=True)
     server = models.CharField(max_length=100, default='')
     species = models.CharField(max_length=100, default='')
     city_state = models.CharField(max_length=100, default='')
@@ -128,16 +128,74 @@ class Character(models.Model):
             }
         }
 
+    def __str__(self):
+        return '[{server}] {name}'.format(
+            server=self.server,
+            name=self.name
+        )
+
+    def __repr__(self):
+        return '<Character name={name} id={id}>'.format(
+            name=self.name,
+            id=self.lodestone_id
+        )
+
 
 class Item(models.Model):
-    lodestone_id = models.CharField(max_length=200)
+    lodestone_id = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=200)
+    item_type = models.CharField(max_length=100, default='Body')
+
+    damage = models.IntegerField(default=0)
+    auto_attack = models.FloatField(default=0)
+    delay = models.FloatField(default=0)
+
+    defense = models.IntegerField(default=0)
+    magic_defense = models.IntegerField(default=0)
+
+    block_strength = models.IntegerField(default=0)
+    block_rate = models.IntegerField(default=0)
 
     def as_dict(self):
-        return {
-            'lodestone_id': self.lodestone_id,
-            'name': self.name
-        }
+        try:
+            if self.block_rate > 0:
+                main_stats = {
+                    'block_strength': self.block_strength,
+                    'block_rate': self.block_rate
+                }
+            elif self.damage > 0:
+                main_stats = {
+                    'damage': self.damage,
+                    'auto_attack': self.auto_attack,
+                    'delay': self.delay
+                }
+            elif self.defense > 0:
+                main_stats = {
+                    'defense': self.defense,
+                    'magic_defense': self.magic_defense
+                }
+            else:
+                main_stats = None
+
+            return {
+                'lodestone_id': self.lodestone_id,
+                'name': self.name,
+                'stats': main_stats
+            }
+        except TypeError:
+            logging.error('Unable to parse to dict {}'.format(self.__repr__()), exc_info=True)
+
+    def __repr__(self):
+        return '<Item name={name} id={lodestone_id} type={type}>'.format(
+            name=self.name,
+            lodestone_id=self.lodestone_id,
+            type=self.item_type
+        )
+
+    def __str__(self):
+        return '{name}'.format(
+            name=self.name
+        )
 
 
 class Job(models.Model):
@@ -334,3 +392,16 @@ class Job(models.Model):
                 }
             }
         }
+
+    def __str__(self):
+        return '{character} > {job}'.format(
+            character=self.character.name,
+            job=self.job
+        )
+
+    def __repr__(self):
+        return '<Job char={character} job={} charid={}>'.format(
+            character=self.character.name,
+            job=self.job,
+            charid=self.character.lodestone_id
+        )
