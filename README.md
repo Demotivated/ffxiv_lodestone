@@ -8,28 +8,46 @@ Example APIs:
 
 ```
 {
-    "name": "Mina Loriel",
-    "classes": {
-        "armorer": {
-            "level": 15
+  "server": "Zalera",
+  "lodestone_id": "8774791",
+  "grand_company": {
+    "name": "Order of the Twin Adder",
+    "rank": "Second Serpent Lieutenant"
+  },
+  "city_state": "Gridania",
+  "jobs": [
+    {
+      "level": 50,
+      "items": [
+        {
+          "lodestone_id": "d19447e548d",
+          "name": "Thyrus Zenith"
         },
-        "pugilist": {
-            "level": 0
+        {
+          "lodestone_id": "fa0a11eb218",
+          "name": "Platinum Circlet of Healing"
         },
-        "carpenter": {
-            "level": 50
-        }
+        {
+          "lodestone_id": "cada9ec7074",
+          "name": "Arachne Robe"
+        },
         ...
+      ],
+      "job": "White Mage"
+    }
+  ],
+  "name": "Mina Loriel",
+  "free_company": "Zanarkand",
+  "species": "Miqo'te",
+  "classes": {
+    "conjurer": {
+      "level": 50
     },
-    "grand_company": {
-        "name": "Order of the Twin Adder",
-        "rank": "Second Serpent Lieutenant"
+    "astrologian": {
+      "level": 0
     },
-    "city_state": "Gridania",
-    "free_company": "Zanarkand",
-    "species": "Miqo'te",
-    "server": "Zalera",
-    "lodestone_id": "8774791"
+    ...
+  }
 }
 ```
 
