@@ -17,7 +17,58 @@ Example APIs:
   "city_state": "Gridania",
   "jobs": [
     {
+      "stats": {
+        "tp": 1000,
+        "mp": 4566,
+        "hp": 4583
+      },
       "level": 50,
+      "properties": {
+        "offensive": {
+          "accuracy": 378,
+          "critical_hit_rate": 432,
+          "determination": 251
+        },
+        "physical": {
+          "skill_speed": 341,
+          "attack_power": 112
+        },
+        "defensive": {
+          "parry": 341,
+          "magic_defense": 543,
+          "defense": 317
+        },
+        "mental": {
+          "healing_magic_potency": 527,
+          "attack_magic_potency": 210,
+          "spell_speed": 442
+        }
+      },
+      "resistances": {
+        "physical": {
+          "slashing": 100,
+          "blunt": 100,
+          "piercing": 100
+        },
+        "elemental": {
+          "lightning": 267,
+          "water": 271,
+          "wind": 269,
+          "ice": 269,
+          "fire": 269,
+          "earth": 270
+        },
+        "status": {
+          "sleep": 0,
+          "heavy": 0,
+          "blind": 0,
+          "bind": 0,
+          "silence": 0,
+          "stun": 0,
+          "slow": 0,
+          "poison": 0
+        }
+      },
       "items": [
         {
           "lodestone_id": "d19447e548d",
