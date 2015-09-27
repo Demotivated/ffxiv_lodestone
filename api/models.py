@@ -274,6 +274,11 @@ class Job(models.Model):
             'job': JOBS[self.job].value,
             'level': self.level,
             'items': items,
+            'stats': {
+                'hp': self.hp,
+                'mp': self.mp,
+                'tp': self.tp
+            },
             'attributes': {
                 'strength': self.strength,
                 'dexterity': self.dexterity,
