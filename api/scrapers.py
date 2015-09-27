@@ -90,6 +90,24 @@ def scrape_character_by_id(lodestone_id):
             job=job_id
         )
 
+        # Populate stats
+        job.hp, job.mp, job.tp = tree.xpath('//div[@id="param_power_area"]/ul/li/text()')
+
+        job.strength, job.dexterity, job.vitality, job.intelligence, job.mind, job.piety = \
+            tree.xpath('//ul[@class="param_list_attributes"]/li/span/text()')
+
+        job.fire, job.ice, job.wind, job.earth, job.lightning, job.water = \
+            tree.xpath('//ul[@class="param_list_elemental"]/li/span[@class="val"]/text()')
+
+        job.accuracy, job.crit_rate, job.determination, \
+            job.defense, job.parry, job.magic_defense, \
+            job.attack_power, job.skill_speed, \
+            job.attack_magic_potency, job.healing_magic_potency, job.spell_speed, \
+            job.slow_resist, job.silence_resist, job.blind_resist, job.poison_resist, \
+            job.stun_resist, job.sleep_resist, job.bind_resist, job.heavy_resist, \
+            job.slashing_resist, job.piercing_resist, job.blunt_resist = \
+            tree.xpath('//ul[@class="param_list"]/li/span[@class="right"]/text()')
+
         # Populate items
         html_item_list = tree.xpath('//div[@class="item_detail_box"]/div/div/div/div/a')
         item_ids = []

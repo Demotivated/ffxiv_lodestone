@@ -145,6 +145,52 @@ class Job(models.Model):
     job = models.CharField(max_length=25)
     items = models.ManyToManyField(Item)
 
+    hp = models.IntegerField(default=0)
+    mp = models.IntegerField(default=0)
+    tp = models.IntegerField(default=0)
+
+    strength = models.IntegerField(default=0)
+    dexterity = models.IntegerField(default=0)
+    vitality = models.IntegerField(default=0)
+    intelligence = models.IntegerField(default=0)
+    mind = models.IntegerField(default=0)
+    piety = models.IntegerField(default=0)
+
+    fire = models.IntegerField(default=0)
+    ice = models.IntegerField(default=0)
+    wind = models.IntegerField(default=0)
+    earth = models.IntegerField(default=0)
+    lightning = models.IntegerField(default=0)
+    water = models.IntegerField(default=0)
+
+    accuracy = models.IntegerField(default=0)
+    crit_rate = models.IntegerField(default=0)
+    determination = models.IntegerField(default=0)
+
+    defense = models.IntegerField(default=0)
+    parry = models.IntegerField(default=0)
+    magic_defense = models.IntegerField(default=0)
+
+    attack_power = models.IntegerField(default=0)
+    skill_speed = models.IntegerField(default=0)
+
+    attack_magic_potency = models.IntegerField(default=0)
+    healing_magic_potency = models.IntegerField(default=0)
+    spell_speed = models.IntegerField(default=0)
+
+    slow_resist = models.IntegerField(default=0)
+    silence_resist = models.IntegerField(default=0)
+    blind_resist = models.IntegerField(default=0)
+    poison_resist = models.IntegerField(default=0)
+    stun_resist = models.IntegerField(default=0)
+    sleep_resist = models.IntegerField(default=0)
+    bind_resist = models.IntegerField(default=0)
+    heavy_resist = models.IntegerField(default=0)
+
+    slashing_resist = models.IntegerField(default=0)
+    piercing_resist = models.IntegerField(default=0)
+    blunt_resist = models.IntegerField(default=0)
+
     @property
     def level(self):
         if self.job == JOBS.MARAUDER.name:
@@ -227,5 +273,59 @@ class Job(models.Model):
         return {
             'job': JOBS[self.job].value,
             'level': self.level,
-            'items': items
+            'items': items,
+            'attributes': {
+                'strength': self.strength,
+                'dexterity': self.dexterity,
+                'vitality': self.vitality,
+                'intelligence': self.intelligence,
+                'mind': self.mind,
+                'piety': self.piety
+            },
+            'properties': {
+                'offensive': {
+                    'accuracy': self.accuracy,
+                    'critical_hit_rate': self.crit_rate,
+                    'determination': self.determination
+                },
+                'defensive': {
+                    'defense': self.defense,
+                    'parry': self.parry,
+                    'magic_defense': self.magic_defense
+                },
+                'physical': {
+                    'attack_power': self.attack_power,
+                    'skill_speed': self.skill_speed
+                },
+                'mental': {
+                    'attack_magic_potency': self.attack_magic_potency,
+                    'healing_magic_potency': self.healing_magic_potency,
+                    'spell_speed': self.spell_speed
+                }
+            },
+            'resistances': {
+                'elemental': {
+                    'fire': self.fire,
+                    'ice': self.ice,
+                    'wind': self.wind,
+                    'earth': self.earth,
+                    'lightning': self.lightning,
+                    'water': self.water
+                },
+                'status': {
+                    'slow': self.slow_resist,
+                    'silence': self.silence_resist,
+                    'blind': self.blind_resist,
+                    'poison': self.poison_resist,
+                    'stun': self.stun_resist,
+                    'sleep': self.sleep_resist,
+                    'bind': self.bind_resist,
+                    'heavy': self.heavy_resist
+                },
+                'physical': {
+                    'slashing': self.slashing_resist,
+                    'piercing': self.piercing_resist,
+                    'blunt': self.blunt_resist
+                }
+            }
         }
