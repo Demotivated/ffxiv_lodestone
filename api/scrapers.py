@@ -1,11 +1,11 @@
-import logging
+from django.core.exceptions import ObjectDoesNotExist
 
 import requests
 from lxml import html
 
 from .models import *
 from .exceptions import ParsingException
-from .constants import USER_AGENT
+from .constants import USER_AGENT, JOB_IDS
 
 
 def scrape_character_by_id(lodestone_id):
@@ -53,69 +53,58 @@ def scrape_character_by_id(lodestone_id):
             return parse_level(level)
 
         # Populate classes
-        char.gladiator = Gladiator(
-            level=level_from_index(0))
-        char.pugilist = Pugilist(
-            level=level_from_index(1))
-        char.marauder = Marauder(
-            level=level_from_index(2))
-        char.lancer = Lancer(
-            level=level_from_index(3))
-        char.archer = Archer(
-            level=level_from_index(4))
-        char.rogue = Rogue(
-            level=level_from_index(5))
-        char.conjurer = Conjurer(
-            level=level_from_index(6))
-        char.thaumaturge = Thaumaturge(
-            level=level_from_index(7))
-        char.arcanist = Arcanist(
-            level=level_from_index(8))
+        char.lvl_gladiator = level_from_index(0)
+        char.lvl_pugilist = level_from_index(1)
+        char.lvl_marauder = level_from_index(2)
+        char.lvl_lancer = level_from_index(3)
+        char.lvl_archer = level_from_index(4)
+        char.lvl_rogue = level_from_index(5)
+        char.lvl_conjurer = level_from_index(6)
+        char.lvl_thaumaturge = level_from_index(7)
+        char.lvl_arcanist = level_from_index(8)
 
-        char.darknight = DarkNight(
-            level=level_from_index(9))
-        char.machinist = Machinist(
-            level=level_from_index(10))
-        char.astrologian = Astrologian(
-            level=level_from_index(11))
+        char.lvl_darknight = level_from_index(9)
+        char.lvl_machinist = level_from_index(10)
+        char.lvl_astrologian = level_from_index(11)
 
-        char.carpenter = Carpenter(
-            level=level_from_index(12))
-        char.blacksmith = Blacksmith(
-            level=level_from_index(13))
-        char.armorer = Armorer(
-            level=level_from_index(14))
-        char.goldsmith = Goldsmith(
-            level=level_from_index(15))
-        char.leatherworker = Leatherworker(
-            level=level_from_index(16))
-        char.weaver = Weaver(
-            level=level_from_index(17))
-        char.alchemist = Alchemist(
-            level=level_from_index(18))
-        char.culinarian = Culinarian(
-            level=level_from_index(19))
-        char.miner = Miner(
-            level=level_from_index(20))
-        char.botanist = Botanist(
-            level=level_from_index(21))
-        char.fisher = Fisher(
-            level=level_from_index(22))
+        char.lvl_carpenter = level_from_index(12)
+        char.lvl_blacksmith = level_from_index(13)
+        char.lvl_armorer = level_from_index(14)
+        char.lvl_goldsmith = level_from_index(15)
+        char.lvl_leatherworker = level_from_index(16)
+        char.lvl_weaver = level_from_index(17)
+        char.lvl_alchemist = level_from_index(18)
+        char.lvl_culinarian = level_from_index(19)
+
+        char.lvl_miner = level_from_index(20)
+        char.lvl_botanist = level_from_index(21)
+        char.lvl_fisher = level_from_index(22)
+
+        # Find current job
+        job_images = tree.xpath('//div[@id="class_info"]/div[@class="ic_class_wh24_box"]/img')
+        job_image_id = job_images[0].attrib['src'].split('?')[1]
+        job_id = JOB_IDS[job_image_id].name
+
+        job, _ = char.job_set.get_or_create(
+            job=job_id
+        )
 
         # Populate items
-        # html_item_list = tree.xpath('//div[@class="item_detail_box"]/div/div/div/div/a')
-        # item_ids = []
-        # for item_id in html_item_list:
-        #     item_ids.append(item_id.attrib['href'].split('/')[5])
-        #
-        # for item_id in item_ids:
-        #     try:
-        #         item = Item.objects.get(lodestone_id=item_ids)
-        #     except ObjectDoesNotExist:
-        #         item = scrape_item_by_id(item_id)
-        #     finally:
-        #         # Add to current class' item list
-        #         pass
+        html_item_list = tree.xpath('//div[@class="item_detail_box"]/div/div/div/div/a')
+        item_ids = []
+        for item_id in html_item_list:
+            item_ids.append(item_id.attrib['href'].split('/')[5])
+
+        for item_id in item_ids:
+            try:
+                item = Item.objects.get(lodestone_id=item_ids)
+            except ObjectDoesNotExist:
+                item = scrape_item_by_id(item_id)
+            finally:
+                # Add to current class' item list
+                job.items.add(item)
+
+        job.save()
 
     except (IndexError, ValueError):
         raise ParsingException('Unable to parse id {} from lodestone'.format(lodestone_id))

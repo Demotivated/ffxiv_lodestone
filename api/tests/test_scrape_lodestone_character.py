@@ -42,6 +42,62 @@ class ScrapeFromLodestoneTestCase(TestCase):
                 "server": "Zalera",
                 "lodestone_id": "8774791",
                 "city_state": "Gridania",
+                "jobs": [
+                    {
+                        'job': 'White Mage',
+                        'level': 50,
+                        "items": [
+                            {
+                                "lodestone_id": "d19447e548d",
+                                "name": "Thyrus Zenith"
+                            },
+                            {
+                                "lodestone_id": "fa0a11eb218",
+                                "name": "Platinum Circlet of Healing"
+                            },
+                            {
+                                "lodestone_id": "cada9ec7074",
+                                "name": "Arachne Robe"
+                            },
+                            {
+                                "lodestone_id": "ec2ddbdcd47",
+                                "name": "Weathered Daystar Gloves"
+                            },
+                            {
+                                "lodestone_id": "3f4a40dca32",
+                                "name": "Weathered Daystar Belt"
+                            },
+                            {
+                                "lodestone_id": "8a049823b22",
+                                "name": "Weathered Daystar Breeches"
+                            },
+                            {
+                                "lodestone_id": "6bfac2114ef",
+                                "name": "Weathered Daystar Sollerets"
+                            },
+                            {
+                                "lodestone_id": "a2e77d6e599",
+                                "name": "Emerald Choker"
+                            },
+                            {
+                                "lodestone_id": "3ef1897edbb",
+                                "name": "Emerald Earrings"
+                            },
+                            {
+                                "lodestone_id": "ec78b3a439e",
+                                "name": "Weathered Daystar Armillae"
+                            },
+                            {
+                                "lodestone_id": "946b83ef9c4",
+                                "name": "Emerald Ring"
+                            },
+                            {
+                                "lodestone_id": "9cca5eb0fd2",
+                                "name": "Soul of the White Mage"
+                            }
+                        ],
+                    }
+                ],
                 "classes": {
                     "armorer": {
                         "level": 15
