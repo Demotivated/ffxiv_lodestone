@@ -20,6 +20,8 @@ class ScrapeFromLodestoneTestCase(TestCase):
         thyrus = Item.objects.get(lodestone_id=self.lodestone_id)
         self.assertEqual('Thyrus Zenith', thyrus.name)
         self.assertEqual(self.lodestone_id, thyrus.lodestone_id)
+        self.assertEqual(90, thyrus.item_level)
+        self.assertEqual('Two-handed Conjurer\'s Arm', thyrus.item_type)
 
     def test_json_response(self):
         self.maxDiff = None
