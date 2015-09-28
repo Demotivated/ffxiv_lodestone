@@ -2,7 +2,7 @@ import logging
 
 from django.db import models
 
-from .constants import JOBS
+from .constants import JOBS, JOBS_CHOICES
 
 
 class Character(models.Model):
@@ -129,8 +129,7 @@ class Character(models.Model):
         }
 
     def __str__(self):
-        return '[{server}] {name}'.format(
-            server=self.server,
+        return '{name}'.format(
             name=self.name
         )
 
@@ -200,7 +199,7 @@ class Item(models.Model):
 
 class Job(models.Model):
     character = models.ForeignKey(Character)
-    job = models.CharField(max_length=25)
+    job = models.CharField(max_length=25, choices=JOBS_CHOICES)
     items = models.ManyToManyField(Item)
 
     hp = models.IntegerField(default=0)

@@ -49,6 +49,12 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ['item_type']
 
 
+class JobAdmin(admin.ModelAdmin):
+    list_display = ('character', 'job')
+    list_filter = ['job']
+    filter_horizontal = ('items',)
+
+
 admin.site.register(Character, CharacterAdmin)
 admin.site.register(Item, ItemAdmin)
-admin.site.register(Job)
+admin.site.register(Job, JobAdmin)

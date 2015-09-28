@@ -44,6 +44,9 @@ class JOBS(Enum):
     MACHINIST = 'Machinist'
 
 
+JOBS_CHOICES = map(lambda i: (i.name, i.value), JOBS)
+
+
 JOB_IDS = {
     '1367039495': JOBS.WHITEMAGE
 }
