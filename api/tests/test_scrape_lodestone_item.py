@@ -32,7 +32,9 @@ class ScrapeFromLodestoneTestCase(TestCase):
                     "auto_attack": 52.74
                 },
                 "lodestone_id": "d19447e548d",
-                "name": "Thyrus Zenith"
+                "name": "Thyrus Zenith",
+                "ilevel": 90,
+                "type": "Two-handed Conjurer's Arm"
             }
         )
 

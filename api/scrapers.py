@@ -178,7 +178,7 @@ def scrape_item_by_id(lodestone_id):
             item.item_level = 0
 
         main_stats = tree.xpath('//div[@class="clearfix sys_nq_element"]/div/strong/text()')
-        if main_stats and item.item_type != 'Soul Crystal':
+        if main_stats:
             if item.item_type == "Shield":
                 item.block_strength = int(main_stats[0])
                 item.block_rate = int(main_stats[1])
@@ -189,8 +189,6 @@ def scrape_item_by_id(lodestone_id):
                 item.damage = int(main_stats[0])
                 item.auto_attack = float(main_stats[1])
                 item.delay = float(main_stats[2])
-        else:
-            logging.error('Unable to find main stats in {}'.format(lodestone_id))
 
         item.save()
 
