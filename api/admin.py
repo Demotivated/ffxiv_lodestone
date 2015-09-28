@@ -40,13 +40,13 @@ class CharacterAdmin(admin.ModelAdmin):
 class ItemAdmin(admin.ModelAdmin):
     readonly_fields = ('lodestone_id',)
     fieldsets = [
-        (None,              {'fields': ['name', 'lodestone_id', 'item_type']}),
+        (None,              {'fields': ['name', 'lodestone_id', 'item_type', 'item_level']}),
         ('Weapon Stats',    {'fields': ['damage', 'auto_attack', 'delay']}),
         ('Armor Stats',     {'fields': ['defense', 'magic_defense']}),
         ('Shield Stats',    {'fields': ['block_strength', 'block_rate']}),
     ]
-    list_display = ('name', 'item_type')
-    list_filter = ['item_type']
+    list_display = ('name', 'item_type', 'item_level')
+    list_filter = ['item_type', 'item_level']
 
 
 class JobAdmin(admin.ModelAdmin):

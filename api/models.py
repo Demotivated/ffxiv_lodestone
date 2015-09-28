@@ -144,6 +144,7 @@ class Item(models.Model):
     lodestone_id = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=200)
     item_type = models.CharField(max_length=100, default='Body')
+    item_level = models.IntegerField(default=0)
 
     damage = models.IntegerField(default=0)
     auto_attack = models.FloatField(default=0)
@@ -179,6 +180,8 @@ class Item(models.Model):
             return {
                 'lodestone_id': self.lodestone_id,
                 'name': self.name,
+                'ilevel': self.item_level,
+                'type': self.item_type,
                 'stats': main_stats
             }
         except TypeError:
