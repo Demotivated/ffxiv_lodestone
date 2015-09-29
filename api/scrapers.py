@@ -36,8 +36,9 @@ def scrape_character_by_id(lodestone_id):
         char.grand_company_name, char.grand_company_rank = grand_company.split('/')
 
         info = tree.xpath('//div[@class="chara_profile_title"]')
-        species, _, _ = info[0].text.split('/')
+        species, _, gender = info[0].text.split('/')
         char.species = species.strip()
+        char.gender = 'Female' if ord(gender.strip()) == 9792 else 'Male'
         char.save()
 
         class_list_from_html = tree.xpath('//td/text()')

@@ -10,6 +10,7 @@ class Character(models.Model):
     lodestone_id = models.CharField(max_length=100, default='', unique=True)
     server = models.CharField(max_length=100, default='')
     species = models.CharField(max_length=100, default='')
+    gender = models.CharField(max_length=20, default='')
     city_state = models.CharField(max_length=100, default='')
     free_company = models.CharField(max_length=100, default='')
     grand_company_name = models.CharField(max_length=100, default='')
@@ -48,6 +49,7 @@ class Character(models.Model):
             'lodestone_id': self.lodestone_id,
             'server': self.server,
             'species': self.species,
+            'gender': self.gender,
             'city_state': self.city_state,
             'free_company': self.free_company,
             'grand_company': {

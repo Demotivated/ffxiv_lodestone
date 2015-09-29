@@ -6,7 +6,13 @@ from .models import Character, Job, Item
 class CharacterAdmin(admin.ModelAdmin):
     readonly_fields = ('lodestone_id',)
     fieldsets = [
-        (None,              {'fields': ['name', 'lodestone_id', 'server', 'species', 'city_state', 'free_company']}),
+        (None,              {'fields': ['name',
+                                        'lodestone_id',
+                                        'server',
+                                        'species',
+                                        'gender',
+                                        'city_state',
+                                        'free_company']}),
         ('Grand Company',   {'fields': ['grand_company_name', 'grand_company_rank']}),
         ('Class Levels',    {'fields': ['lvl_archer',
                                         'lvl_lancer',
