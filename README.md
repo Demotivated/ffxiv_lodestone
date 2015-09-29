@@ -106,7 +106,14 @@ Example APIs:
 
 ```
 {
-    "lodestone_id": "d19447e548d",
-    "name": "Thyrus Zenith"
+  "ilevel": 90,
+  "lodestone_id": "d19447e548d",
+  "name": "Thyrus Zenith",
+  "stats": {
+    "auto_attack": 52.74,
+    "delay": 3.44,
+    "damage": 69
+  },
+  "type": "Two-handed Conjurer's Arm"
 }
 ```
