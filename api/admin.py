@@ -44,6 +44,13 @@ class ItemAdmin(admin.ModelAdmin):
         ('Weapon Stats',    {'fields': ['damage', 'auto_attack', 'delay']}),
         ('Armor Stats',     {'fields': ['defense', 'magic_defense']}),
         ('Shield Stats',    {'fields': ['block_strength', 'block_rate']}),
+        ('Stats',           {'fields': ['vitality',
+                                        'mind',
+                                        'determination',
+                                        'spell_speed',
+                                        'accuracy',
+                                        'critical_hit_rate',
+                                        'piety']})
     ]
     list_display = ('name', 'item_type', 'item_level')
     list_filter = ['item_type', 'item_level']

@@ -156,33 +156,43 @@ class Item(models.Model):
     block_strength = models.IntegerField(default=0)
     block_rate = models.IntegerField(default=0)
 
+    vitality = models.IntegerField(default=0)
+    mind = models.IntegerField(default=0)
+    determination = models.IntegerField(default=0)
+    spell_speed = models.IntegerField(default=0)
+    accuracy = models.IntegerField(default=0)
+    critical_hit_rate = models.IntegerField(default=0)
+    piety = models.IntegerField(default=0)
+
     def as_dict(self):
         try:
-            if self.block_rate > 0:
-                main_stats = {
-                    'block_strength': self.block_strength,
-                    'block_rate': self.block_rate
-                }
-            elif self.damage > 0:
-                main_stats = {
-                    'damage': self.damage,
-                    'auto_attack': self.auto_attack,
-                    'delay': self.delay
-                }
-            elif self.defense > 0:
-                main_stats = {
-                    'defense': self.defense,
-                    'magic_defense': self.magic_defense
-                }
-            else:
-                main_stats = None
-
             return {
                 'lodestone_id': self.lodestone_id,
                 'name': self.name,
                 'ilevel': self.item_level,
                 'type': self.item_type,
-                'stats': main_stats
+                'stats': {
+                    'weapon_stats': {
+                        'damage': self.damage,
+                        'auto_attack': self.auto_attack,
+                        'delay': self.delay
+                        },
+                    'armor_stats': {
+                        'defense': self.defense,
+                        'magic_defense': self.magic_defense
+                    },
+                    'shield_stats': {
+                        'block_strength': self.block_strength,
+                        'block_rate': self.block_rate
+                    },
+                    'vitality': self.vitality,
+                    'mind': self.mind,
+                    'determination': self.determination,
+                    'spell_speed': self.spell_speed,
+                    'accuracy': self.accuracy,
+                    'critical_hit_rate': self.critical_hit_rate,
+                    'piety': self.piety
+                }
             }
         except TypeError:
             logging.error('Unable to parse to dict {}'.format(self.__repr__()), exc_info=True)

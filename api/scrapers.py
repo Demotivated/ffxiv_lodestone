@@ -190,6 +190,36 @@ def scrape_item_by_id(lodestone_id):
                 item.auto_attack = float(main_stats[1])
                 item.delay = float(main_stats[2])
 
+        basic_stats = tree.xpath('//ul[@class="basic_bonus"]/li/text()')
+        for stat_string in basic_stats:
+            stat_split = stat_string.split('+')
+            stat = stat_split[0].strip()
+            value = int(stat_split[1].strip())
+
+            if stat == 'Vitality':
+                item.vitality = value
+
+            elif stat == 'Mind':
+                item.mind = value
+
+            elif stat == 'Determination':
+                item.determination = value
+
+            elif stat == 'Spell Speed':
+                item.spell_speed = value
+
+            elif stat == 'Accuracy':
+                item.accuracy = value
+
+            elif stat == 'Critical Hit Rate':
+                item.critical_hit_rate = value
+
+            elif stat == 'Piety':
+                item.piety = value
+
+            else:
+                logging.error('Unable to properly match the stat {}'.format(stat))
+
         item.save()
 
     except (IndexError, ValueError):

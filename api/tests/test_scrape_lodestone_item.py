@@ -29,9 +29,26 @@ class ScrapeFromLodestoneTestCase(TestCase):
             self.response.content.decode('utf-8'),
             {
                 "stats": {
-                    "damage": 69,
-                    "delay": 3.44,
-                    "auto_attack": 52.74
+                    "determination": 26,
+                    "critical_hit_rate": 0,
+                    "accuracy": 0,
+                    "piety": 0,
+                    "shield_stats": {
+                        "block_rate": 0,
+                        "block_strength": 0
+                    },
+                    "weapon_stats": {
+                        "damage": 69,
+                        "delay": 3.44,
+                        "auto_attack": 52.74
+                    },
+                    "spell_speed": 26,
+                    "mind": 31,
+                    "vitality": 32,
+                    "armor_stats": {
+                        "defense": 0,
+                        "magic_defense": 0
+                    }
                 },
                 "lodestone_id": "d19447e548d",
                 "name": "Thyrus Zenith",
