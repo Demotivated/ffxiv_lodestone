@@ -12,7 +12,8 @@ class Character(models.Model):
     species = models.CharField(max_length=100, default='')
     gender = models.CharField(max_length=20, default='')
     city_state = models.CharField(max_length=100, default='')
-    free_company = models.CharField(max_length=100, default='')
+    free_company_name = models.CharField(max_length=100, default='')
+    free_company_id = models.CharField(max_length=100, default='')
     grand_company_name = models.CharField(max_length=100, default='')
     grand_company_rank = models.CharField(max_length=100, default='')
 
@@ -51,7 +52,10 @@ class Character(models.Model):
             'species': self.species,
             'gender': self.gender,
             'city_state': self.city_state,
-            'free_company': self.free_company,
+            'free_company': {
+                'name': self.free_company_name,
+                'lodestone_id': self.free_company_id
+            },
             'grand_company': {
                 'name': self.grand_company_name,
                 'rank': self.grand_company_rank

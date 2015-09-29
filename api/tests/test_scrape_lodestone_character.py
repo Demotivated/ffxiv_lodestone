@@ -23,7 +23,8 @@ class ScrapeFromLodestoneTestCase(TestCase):
         self.assertEqual('Order of the Twin Adder', mina.grand_company_name)
         self.assertEqual('Second Serpent Lieutenant', mina.grand_company_rank)
         self.assertEqual('Gridania', mina.city_state)
-        self.assertEqual('Zanarkand', mina.free_company)
+        self.assertEqual('Zanarkand', mina.free_company_name)
+        self.assertEqual('9229142273877347770', mina.free_company_id)
         self.assertEqual('Zalera', mina.server)
         self.assertEqual('Miqo\'te', mina.species)
 

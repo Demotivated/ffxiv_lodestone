@@ -28,7 +28,9 @@ def scrape_character_by_id(lodestone_id):
         tree = html.fromstring(page.text)
 
         char.name = tree.xpath('//title/text()')[0].split('|')[0].strip()
-        char.free_company = tree.xpath('//dd[@class="txt_name"]/a[contains(@href, "")]/text()')[0]
+        char.free_company_name = tree.xpath('//dd[@class="txt_name"]/a[contains(@href, "")]/text()')[0]
+        char.free_company_id = \
+            tree.xpath('//dd[@class="txt_name"]/a[contains(@href, "")]')[0].attrib['href'].split('/')[3]
         char.server = tree.xpath('//h2//span/text()')[0].strip()[1:-1]
 
         info = tree.xpath('//dd[@class="txt_name"]/text()')

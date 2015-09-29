@@ -4,15 +4,15 @@ from .models import Character, Job, Item
 
 
 class CharacterAdmin(admin.ModelAdmin):
-    readonly_fields = ('lodestone_id',)
+    readonly_fields = ('lodestone_id', 'free_company_id')
     fieldsets = [
         (None,              {'fields': ['name',
                                         'lodestone_id',
                                         'server',
                                         'species',
                                         'gender',
-                                        'city_state',
-                                        'free_company']}),
+                                        'city_state']}),
+        ('Free Company',    {'fields': ['free_company_name', 'free_company_id']}),
         ('Grand Company',   {'fields': ['grand_company_name', 'grand_company_rank']}),
         ('Class Levels',    {'fields': ['lvl_archer',
                                         'lvl_lancer',
@@ -39,8 +39,8 @@ class CharacterAdmin(admin.ModelAdmin):
                                         'lvl_miner'],
                              'classes': ['collapse']})
     ]
-    list_display = ('name', 'server', 'free_company')
-    list_filter = ['server', 'free_company']
+    list_display = ('name', 'server', 'free_company_name')
+    list_filter = ['server', 'free_company_name']
 
 
 class ItemAdmin(admin.ModelAdmin):
