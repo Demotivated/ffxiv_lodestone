@@ -3,7 +3,8 @@ from functools import wraps
 from django.http import JsonResponse, HttpResponseServerError
 
 from .exceptions import ParsingException
-from .scrapers import scrape_character_by_id, scrape_item_by_id
+from .scrapers.character import scrape_character_by_id
+from .scrapers.item import scrape_item_by_id
 
 
 def json_api(f):
