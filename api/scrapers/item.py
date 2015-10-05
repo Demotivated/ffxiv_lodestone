@@ -18,8 +18,6 @@ def scrape_item_by_id(lodestone_id):
     'Thyrus Zenith'
     >>> thyrus.item_level
     90
-    >>> thyrus.mind
-    31
 
     :param lodestone_id: Alpha-numeric ID in the URL of the item's Lodestone page
     :return: New / updated :class:`api.models.Item`
