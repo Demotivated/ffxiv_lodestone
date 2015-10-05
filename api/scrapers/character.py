@@ -15,7 +15,7 @@ def scrape_character_by_id(lodestone_id):
     """
 
     :param lodestone_id: Numeric ID in the URL of the character's Lodestone page
-    :return: New / updated Character object
+    :return: New / updated :class:`api.models.Character`
     :raise ParsingException: Unexpected errors while scraping the HTML will throw
     """
     logging.debug('Attempting to parse character id {}'.format(lodestone_id))
