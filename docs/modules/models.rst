@@ -1,4 +1,16 @@
 Models
 ======
-.. automodule:: api.models
-    :members:
+
+.. currentmodule:: api.models
+
+.. autosummary::
+    :nosignatures:
+
+    Character
+    Job
+    Item
+
+.. toctree::
+   :maxdepth: 2
+
+   models/item

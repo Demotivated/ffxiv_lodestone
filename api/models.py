@@ -7,7 +7,7 @@ from .constants import JOBS, JOBS_CHOICES
 
 class Character(models.Model):
     """
-    Represents a single character's basic info and refers to all their known jobs.
+    A single character's basic info and refers to all their known jobs.
     """
     name = models.CharField(max_length=100)
     lodestone_id = models.CharField(max_length=100, default='', unique=True)
@@ -156,12 +156,37 @@ class Character(models.Model):
 
 class Item(models.Model):
     """
-    Represents a weapon, armor, shield, accessory, or soul stone.
+    A weapon, armor, shield, accessory, or soul stone.
+
+    Generated and added to DB by :func:`api.scrapers.character.scrape_item_by_id`.
+
+    Do not initialize this yourself.
     """
     lodestone_id = models.CharField(max_length=200, unique=True)
+    """
+
+    Unique for each item.
+
+    Used to scrape the item's info from Lodestone, see below.
+
+    .. image:: ../../images/item_lodestone_id.PNG
+    """
+
     name = models.CharField(max_length=200)
+    """ In-game item name """
+
     item_type = models.CharField(max_length=100, default='Body')
+    """
+    Examples:
+
+    - Body
+    - Soul Crystal
+    - Necklace
+    - Two-handed Conjurer's Arm
+    """
+
     item_level = models.IntegerField(default=0)
+    """ iLevel """
 
     damage = models.IntegerField(default=0)
     auto_attack = models.FloatField(default=0)
@@ -185,8 +210,38 @@ class Item(models.Model):
     def as_dict(self):
         """
 
+        ::
 
-        :return: Dictionary of the item's properties for easier JSON serialization
+            {
+                "lodestone_id": "fa0a11eb218",
+                "type": "Head",
+                "name": "Platinum Circlet of Healing",
+                "stats": {
+                    "mind": 24,
+                    "determination": 0,
+                    "armor_stats": {
+                        "magic_defense": 66,
+                        "defense": 38
+                    },
+                    "accuracy": 5,
+                    "shield_stats": {
+                        "block_strength": 0,
+                        "block_rate": 0
+                    },
+                    "piety": 13,
+                    "critical_hit_rate": 25,
+                    "weapon_stats": {
+                        "delay": 0.0,
+                        "damage": 0,
+                        "auto_attack": 0.0
+                    },
+                    "spell_speed": 0,
+                    "vitality": 25
+                },
+                "ilevel": 110
+            }
+
+        :return: Dictionary of the item's properties. Very closely mirrors the JSON representation
         """
         try:
             return {
@@ -235,8 +290,7 @@ class Item(models.Model):
 
 class Job(models.Model):
     """
-    Represents a single job for any given :class:`api.models.Character` and all the items and stats of that character \
-    in that job.
+    A single job for any given :class:`api.models.Character` and all its items / stats
 
     Jobs are a *superset* of classes. For example, all of the following are jobs for simplicity
 
