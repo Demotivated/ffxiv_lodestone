@@ -1,8 +1,10 @@
-[![Build Status](https://travis-ci.org/Demotivated/ffxiv_lodestone.svg?branch=master)](https://travis-ci.org/Demotivated/ffxiv_lodestone) [![Coverage Status](https://coveralls.io/repos/Demotivated/ffxiv_lodestone/badge.svg?branch=master&service=github)](https://coveralls.io/github/Demotivated/ffxiv_lodestone?branch=master)
+[![Build Status](https://travis-ci.org/Demotivated/loadstone.svg?branch=master)](https://travis-ci.org/Demotivated/loadstone) [![Coverage Status](https://coveralls.io/repos/Demotivated/loadstone/badge.svg?branch=master&service=github)](https://coveralls.io/github/Demotivated/loadstone?branch=master)
 
-# Tools for FFXIV Lodestone
+# LoadStone
 
-Example APIs:
+## API for FFXIV Lodestone
+
+##
 
 `GET /scrape/character/{lodestone_id}/`
 
