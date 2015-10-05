@@ -11,6 +11,12 @@ __author__ = 'sami'
 
 def scrape_item_by_id(lodestone_id):
 
+    """
+
+    :param lodestone_id: Alpha-numeric ID in the URL of the item's Lodestone page
+    :return: New / updated Item object
+    :raise ParsingException: Unexpected errors while scraping the HTML will throw
+    """
     logging.debug('Attempting to parse items from id {}'.format(lodestone_id))
 
     try:

@@ -47,6 +47,7 @@ class JOBS(Enum):
 JOBS_CHOICES = map(lambda i: (i.name, i.value), JOBS)
 
 
+# TODO Add ids for other jobs
 JOB_IDS = {
     '1367039495': JOBS.WHITEMAGE
 }
