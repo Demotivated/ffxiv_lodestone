@@ -10,8 +10,16 @@ __author__ = 'sami'
 
 
 def scrape_item_by_id(lodestone_id):
-
     """
+    .. image:: ../images/item_lodestone_id.PNG
+
+    >>> thyrus = scrape_item_by_id('d19447e548d')
+    >>> thyrus.name
+    'Thyrus Zenith'
+    >>> thyrus.item_level
+    90
+    >>> thyrus.mind
+    31
 
     :param lodestone_id: Alpha-numeric ID in the URL of the item's Lodestone page
     :return: New / updated :class:`api.models.Item`
