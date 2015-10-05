@@ -14,7 +14,7 @@ def restful_api(f):
             json = f(*args, **kwargs)
         except ParsingException as e:
             return HttpResponseServerError(e.message)
-        return JsonResponse(json.as_dict())
+        return JsonResponse(json.as_dict)
     return decorated
 
 

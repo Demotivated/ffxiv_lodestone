@@ -62,6 +62,7 @@ def scrape_item_by_id(lodestone_id):
             stat = stat_split[0].strip()
             value = int(stat_split[1].strip())
 
+            # TODO add the remaining stats
             if stat == 'Vitality':
                 item.vitality = value
 

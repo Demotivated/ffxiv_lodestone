@@ -6,6 +6,9 @@ from .constants import JOBS, JOBS_CHOICES
 
 
 class Character(models.Model):
+    """
+    Represents a single character's basic info and refers to all their known jobs.
+    """
     name = models.CharField(max_length=100)
     lodestone_id = models.CharField(max_length=100, default='', unique=True)
     server = models.CharField(max_length=100, default='')
@@ -41,9 +44,14 @@ class Character(models.Model):
     lvl_fisher = models.IntegerField(default=0)
     lvl_miner = models.IntegerField(default=0)
 
+    @property
     def as_dict(self):
+        """
 
-        jobs = list(map(lambda x: x.as_dict(), list(self.job_set.all()))) if len(self.job_set.all()) > 0 else []
+
+        :return: Dictionary of the the class' values for easier JSON serialization
+        """
+        jobs = list(map(lambda x: x.as_dict, list(self.job_set.all()))) if len(self.job_set.all()) > 0 else []
 
         return {
             'name': self.name,
@@ -147,6 +155,9 @@ class Character(models.Model):
 
 
 class Item(models.Model):
+    """
+    Represents a weapon, armor, shield, accessory, or soul stone.
+    """
     lodestone_id = models.CharField(max_length=200, unique=True)
     name = models.CharField(max_length=200)
     item_type = models.CharField(max_length=100, default='Body')
@@ -170,7 +181,13 @@ class Item(models.Model):
     critical_hit_rate = models.IntegerField(default=0)
     piety = models.IntegerField(default=0)
 
+    @property
     def as_dict(self):
+        """
+
+
+        :return: Dictionary of the item's properties for easier JSON serialization
+        """
         try:
             return {
                 'lodestone_id': self.lodestone_id,
@@ -182,7 +199,7 @@ class Item(models.Model):
                         'damage': self.damage,
                         'auto_attack': self.auto_attack,
                         'delay': self.delay
-                        },
+                    },
                     'armor_stats': {
                         'defense': self.defense,
                         'magic_defense': self.magic_defense
@@ -217,6 +234,17 @@ class Item(models.Model):
 
 
 class Job(models.Model):
+    """
+    Represents a single job for any given :class:`api.models.Character` and all the items and stats of that character \
+    in that job.
+
+    Jobs are a *superset* of classes. For example, all of the following are jobs for simplicity
+
+    * Archer
+    * Bard
+    * Blacksmith
+    * Machinist
+    """
     character = models.ForeignKey(Character)
     job = models.CharField(max_length=25, choices=JOBS_CHOICES)
     items = models.ManyToManyField(Item)
@@ -269,6 +297,11 @@ class Job(models.Model):
 
     @property
     def level(self):
+        """
+
+
+        :return: The job's level derived from the character's class levels
+        """
         if self.job == JOBS.MARAUDER.name:
             return self.character.lvl_marauder
         elif self.job == JOBS.GLADIATOR.name:
@@ -343,8 +376,14 @@ class Job(models.Model):
             logging.error('Job instance is malformed: job = %s', self.job)
             return 0
 
+    @property
     def as_dict(self):
-        items = list(map(lambda x: x.as_dict(), list(self.items.all()))) if len(self.items.all()) > 0 else []
+        """
+
+
+        :return: Dictionary of the the class' values for easier JSON serialization
+        """
+        items = list(map(lambda x: x.as_dict, list(self.items.all()))) if len(self.items.all()) > 0 else []
 
         return {
             'job': JOBS[self.job].value,
