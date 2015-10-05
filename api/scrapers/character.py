@@ -11,8 +11,12 @@ __author__ = 'sami'
 
 
 def scrape_character_by_id(lodestone_id):
-
     """
+    .. image:: ../images/character_lodestone_id.PNG
+
+    >>> mina = scrape_character_by_id('8774791')
+    >>> mina.free_company_name
+    'Zanarkand'
 
     :param lodestone_id: Numeric ID in the URL of the character's Lodestone page
     :return: New / updated :class:`api.models.Character`
