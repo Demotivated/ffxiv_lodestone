@@ -13,4 +13,6 @@ Models
 .. toctree::
    :maxdepth: 2
 
+   models/character
+   models/job
    models/item

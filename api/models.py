@@ -10,15 +10,60 @@ class Character(models.Model):
     A single character's basic info and refers to all their known jobs.
     """
     name = models.CharField(max_length=100)
+    """
+    :type: String
+    """
+
     lodestone_id = models.CharField(max_length=100, default='', unique=True)
+    """
+    Unique for each item.
+
+    Used to scrape the item's info from Lodestone, see below.
+
+    .. image:: ../../images/character_lodestone_id.PNG
+
+    :type: String
+    """
+
     server = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
+
     species = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
+
     gender = models.CharField(max_length=20, default='')
+    """
+    :type: String
+    """
+
     city_state = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
+
     free_company_name = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
+
     free_company_id = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
+
     grand_company_name = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
+
     grand_company_rank = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
 
     lvl_archer = models.IntegerField(default=0)
     lvl_lancer = models.IntegerField(default=0)
@@ -47,9 +92,9 @@ class Character(models.Model):
     @property
     def as_dict(self):
         """
-
-
         :return: Dictionary of the the class' values for easier JSON serialization
+
+        :rtype: Dictionary
         """
         jobs = list(map(lambda x: x.as_dict, list(self.job_set.all()))) if len(self.job_set.all()) > 0 else []
 
@@ -170,10 +215,14 @@ class Item(models.Model):
     Used to scrape the item's info from Lodestone, see below.
 
     .. image:: ../../images/item_lodestone_id.PNG
+
+    :type: String
     """
 
     name = models.CharField(max_length=200)
-    """ In-game item name """
+    """
+    :type: String
+    """
 
     item_type = models.CharField(max_length=100, default='Body')
     """
@@ -183,10 +232,16 @@ class Item(models.Model):
     - Soul Crystal
     - Necklace
     - Two-handed Conjurer's Arm
+
+    :type: String
     """
 
     item_level = models.IntegerField(default=0)
-    """ iLevel """
+    """
+    iLevel
+
+    :type: Int
+    """
 
     damage = models.IntegerField(default=0)
     auto_attack = models.FloatField(default=0)
