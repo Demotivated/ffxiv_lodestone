@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
-from api.views import scrape_character_view, scrape_item_view
+from api.views import scrape_character_view, scrape_item_view, scrape_free_company_view
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^scrape/character/(?P<lodestone_id>[0-9]+)/$', scrape_character_view, name='scrape_character_view'),
     url(r'^scrape/item/(?P<lodestone_id>[A-Za-z0-9]+)/$', scrape_item_view, name='scrape_item_view'),
+    url(r'^scrape/free_company/(?P<lodestone_id>[0-9]+)/$', scrape_free_company_view, name='scrape_free_company_view'),
 ]

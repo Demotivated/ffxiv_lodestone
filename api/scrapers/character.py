@@ -2,6 +2,7 @@ import logging
 from django.core.exceptions import ObjectDoesNotExist
 from lxml import html
 import requests
+import threading
 from api.constants import USER_AGENT, JOB_IDS
 from api.exceptions import ParsingException
 from api.models import Character, Item
@@ -10,7 +11,7 @@ from api.scrapers.item import ItemThread
 __author__ = 'sami'
 
 
-def scrape_character_by_id(lodestone_id):
+def scrape_character_by_id(lodestone_id) -> Character:
     """
     .. image:: ../images/character_lodestone_id.PNG
 
@@ -146,3 +147,18 @@ def scrape_character_by_id(lodestone_id):
         raise ParsingException('Unable to parse id {} from lodestone'.format(lodestone_id))
 
     return char
+
+
+class CharacterThread(threading.Thread):
+
+    def __init__(self, character_id):
+        threading.Thread.__init__(self)
+        self.character_id = character_id
+        self._character = None
+
+    def run(self):
+        self._character = scrape_character_by_id(self.character_id)
+
+    def join(self, timeout=None):
+        threading.Thread.join(self)
+        return self._character

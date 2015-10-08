@@ -49,5 +49,6 @@ JOBS_CHOICES = map(lambda i: (i.name, i.value), JOBS)
 
 # TODO Add ids for other jobs
 JOB_IDS = {
-    '1367039495': JOBS.WHITEMAGE
+    '1367039495': JOBS.WHITEMAGE,
+    '1434679077': JOBS.BARD,
 }

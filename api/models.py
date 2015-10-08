@@ -571,3 +571,83 @@ class Job(models.Model):
             job=self.job,
             charid=self.character.lodestone_id
         )
+
+
+class FreeCompany(models.Model):
+    """
+    Free Company which contains at least one :class:`api.models.Character` and its associated stats
+
+    Generated and added to DB by :func:`api.scrapers.free_company.scrape_free_company_by_id`.
+    """
+
+    name = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
+
+    server = models.CharField(max_length=100, default='')
+    """
+    :type: String
+    """
+
+    members = models.ManyToManyField(Character)
+    """
+    Members of the free company
+
+    :type: :class:`api.models.Character`
+    """
+
+    lodestone_id = models.CharField(max_length=200, unique=True)
+    """
+    Numeric ID unique for each free company
+
+    Used to scrape the free company's info from Lodestone, see below.
+
+    .. image:: ../../images/free_company_lodestone_id.PNG
+
+    :type: String
+    """
+
+    tag = models.CharField(max_length=20)
+    """
+    :type: String
+    """
+
+    formed = models.DateField()
+    """
+    :type: DateTime
+    """
+
+    rank = models.IntegerField()
+    """
+    Reward rank (max 8). See `wiki <http://ffxiv.consolegameswiki.com/wiki/Free_Company#Free_Company_Entitlements>`_.
+
+    :type: Int
+    """
+
+    weekly_rank = models.IntegerField()
+    """
+    World standings (previous week)
+
+    :type: Int
+    """
+
+    monthly_rank = models.IntegerField()
+    """
+    World standings (previous month)
+
+    :type: Int
+    """
+
+    slogan = models.CharField(max_length=200)
+    """
+    :type: String
+    """
+
+    @property
+    def as_dict(self):
+        """
+        :return: Dictionary of the the class' values for easier JSON serialization
+        """
+
+        return {}

@@ -9,6 +9,7 @@ Models
     Character
     Job
     Item
+    Free Company
 
 .. toctree::
    :maxdepth: 2
@@ -16,3 +17,4 @@ Models
    models/character
    models/job
    models/item
+   models/free_company

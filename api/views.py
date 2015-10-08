@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponseServerError
 from .exceptions import ParsingException
 from .scrapers.character import scrape_character_by_id
 from .scrapers.item import scrape_item_by_id
+from .scrapers.free_company import scrape_free_company_by_id
 
 
 def restful_api(f):
@@ -26,3 +27,8 @@ def scrape_character_view(request, lodestone_id):
 @restful_api
 def scrape_item_view(request, lodestone_id):
     return scrape_item_by_id(lodestone_id)
+
+
+@restful_api
+def scrape_free_company_view(request, lodestone_id):
+    return scrape_free_company_by_id(lodestone_id)
