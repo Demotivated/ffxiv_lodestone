@@ -114,3 +114,8 @@ class ItemThread(threading.Thread):
     def join(self, timeout=None):
         threading.Thread.join(self)
         return self._item
+
+    def __repr__(self):
+        return '<ItemThread item={}>'.format(
+            self._item.__repr__()
+        )
