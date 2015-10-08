@@ -6,4 +6,3 @@ lxml==3.4.4
 requests==2.7.0
 sphinx
 sphinx_rtd_theme
-opbeat==3.0.4

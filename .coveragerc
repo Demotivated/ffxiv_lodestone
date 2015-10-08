@@ -2,4 +2,4 @@
 source = .
 
 [report]
-omit = fxiv_lodestone/wsgi.py
+omit = loadstone/wsgi.py

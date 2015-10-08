@@ -1,1 +1,1 @@
-web: gunicorn fxiv_lodestone.wsgi --log-file -
+web: gunicorn loadstone.wsgi --log-file -

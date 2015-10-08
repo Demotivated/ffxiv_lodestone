@@ -6,7 +6,7 @@ install:
 - pip install -r requirements.txt
 - pip install coveralls
 before_script:
-- psql -c "CREATE DATABASE fxiv_lodestone;" -U postgres
+- psql -c "CREATE DATABASE loadstone;" -U postgres
 script:
 - python manage.py migrate
 - coverage run manage.py test
